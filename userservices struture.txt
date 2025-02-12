@@ -1,0 +1,20 @@
+User services structure
+cab-booking-user-service/
+│── src/
+│   ├── main/
+│   │   ├── java/com/cabbooking/user/
+│   │   │   ├── config/         # Configuration files (Kafka, Security, etc.)
+│   │   │   ├── controller/     # REST controllers
+│   │   │   ├── dto/            # Data Transfer Objects
+│   │   │   ├── entity/         # JPA Entities
+│   │   │   ├── exception/      # Custom exception handling
+│   │   │   ├── repository/     # Spring Data JPA repositories
+│   │   │   ├── service/        # Business logic services
+│   │   │   ├── utils/          # Utility classes
+│   │   │   ├── CabBookingUserServiceApplication.java
+│   │   ├── resources/
+│   │   │   ├── application.yml  # Configurations
+│   ├── test/                    # Test cases
+│── pom.xml                       # Maven dependencies
+│── Dockerfile                    # Docker containerization
+│── README.md                     # Project documentation

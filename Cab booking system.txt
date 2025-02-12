@@ -1,0 +1,26 @@
+
+// Microservices Structure
+// 1. User Service - Manages user profiles, authentication
+// 2. Cab Service - Manages cabs, availability, driver assignments
+// 3. Booking Service - Handles ride requests, allocation, status updates
+// 4. Payment Service - Processes ride payments, billing
+// 5. Notification Service - Sends ride updates via Kafka
+// 6. Gateway Service - API Gateway for routing
+// 7. Discovery Service - Service Registry using Eureka
+// 8. Rating & Review Service - Manages user and driver ratings
+
+// Tech Stack
+// - Backend: Java, Spring Boot, Spring Cloud, Spring Security
+// - Database: PostgreSQL/MySQL, Redis for caching
+// - Messaging: Kafka (event-driven communication)
+// - Service Discovery: Eureka
+// - API Gateway: Spring Cloud Gateway
+// - Containerization: Docker, Kubernetes
+
+// High-Level Flow
+// 1. User registers/login -> User Service
+// 2. User books a cab -> Booking Service checks available cabs from Cab Service
+// 3. Cab allocation event sent via Kafka -> Cab Service assigns a driver
+// 4. Ride status updated in Booking Service -> Notifications sent to the user
+// 5. Payment initiated -> Payment Service processes the transaction
+// 6. Ride completes -> User/driver can leave ratings via Rating Service
