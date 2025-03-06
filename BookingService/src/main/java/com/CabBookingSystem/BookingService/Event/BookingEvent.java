@@ -12,11 +12,13 @@ public class BookingEvent {
     private String status;
     private String pickupLocation;
     private String dropoffLocation;
+    private double amount;
 
-    public BookingEvent(String bookingId, String status, String pickupLocation, String dropoffLocation) {
+    public BookingEvent(String bookingId, String status, String pickupLocation, String dropoffLocation, double amount) {
         this.bookingId = bookingId;
         this.status = status;
         this.pickupLocation = pickupLocation;
         this.dropoffLocation = dropoffLocation;
+        this.amount = amount;
     }
 }

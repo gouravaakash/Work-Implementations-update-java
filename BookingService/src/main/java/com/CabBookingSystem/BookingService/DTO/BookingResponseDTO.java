@@ -18,6 +18,7 @@ public class BookingResponseDTO
     private LocalDateTime bookingTime;
     private String pickupLocation;
     private String dropoffLocation;
+    private double amount;
 
     public BookingResponseDTO(Booking booking) {
         this.bookingId = booking.getBookingId();
@@ -25,5 +26,7 @@ public class BookingResponseDTO
         this.bookingTime = booking.getBookingTime();
         this.pickupLocation = booking.getPickupLocation();
         this.dropoffLocation = booking.getDropoffLocation();
+
+
     }
 }

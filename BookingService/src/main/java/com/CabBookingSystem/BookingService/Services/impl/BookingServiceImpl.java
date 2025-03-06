@@ -28,16 +28,18 @@ public class BookingServiceImpl implements BookingServices {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private FareServiceImpl fareService;
     private static final String USER_SERVICE_URL = "http://user-service/user/{userId}";
 
     private  static final String  CAB_SERVICE_URL = "http://cab-service/api/cab/available";
 
 
     @Override
-    public BookingResponseDTO createBooking(BookingRequestDTO request) {
+    public BookingResponseDTO createBooking(BookingRequestDTO request,double distance) {
         String userId = fetchUserId();
         String cabId = fetchAvailableCab();
-
+        double fare = fareService.calculateFare(distance);
 
         Booking booking = Booking.builder()
                 .userId(userId)
@@ -46,11 +48,13 @@ public class BookingServiceImpl implements BookingServices {
                 .status(Status.REQUESTED)
                 .pickupLocation(request.getPickupLocation())
                 .dropoffLocation(request.getDropoffLocation())
+                .amount(fare)
                 .build();
         bookingRepository.save(booking);
         BookingEvent event = new BookingEvent(booking.getBookingId(),"REQUESTED",
                 booking.getPickupLocation(),
-                booking.getDropoffLocation());
+                booking.getDropoffLocation(),
+                booking.getAmount());
         kafkaTemplate.send("ride-requested", event);
         return convertToResponseDto(booking);
     }
@@ -85,7 +89,8 @@ public class BookingServiceImpl implements BookingServices {
 
         BookingEvent event = new BookingEvent(booking.getBookingId(), "CANCELLED",
                 booking.getPickupLocation(),
-                booking.getDropoffLocation());
+                booking.getDropoffLocation(),
+                booking.getAmount());
         kafkaTemplate.send("ride-cancelled", event);
     }
 
@@ -116,8 +121,10 @@ public class BookingServiceImpl implements BookingServices {
                 booking.getStatus().name(),
                 booking.getBookingTime(),
                 booking.getPickupLocation(),
-                booking.getDropoffLocation()
+                booking.getDropoffLocation(),
+                booking.getAmount()
         );
+
     }
 
 }

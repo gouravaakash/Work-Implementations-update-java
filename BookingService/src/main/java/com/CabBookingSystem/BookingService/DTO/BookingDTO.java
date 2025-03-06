@@ -17,6 +17,7 @@ public class BookingDTO {
     private String status;
     private String pickupLocation;
     private String dropoffLocation;
+    private double amount ;
 
     public BookingDTO(Booking booking){
         this.userId = booking.getUserId();
@@ -25,6 +26,7 @@ public class BookingDTO {
         this.status = booking.getStatus().toString();
         this.pickupLocation= booking.getPickupLocation();
         this.dropoffLocation= booking.getDropoffLocation();
+        this.amount = booking.getAmount();
     }
 
 }

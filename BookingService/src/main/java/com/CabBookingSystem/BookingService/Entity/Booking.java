@@ -31,5 +31,7 @@ public class Booking {
     private String pickupLocation;
     @Column(nullable = false)
     private String dropoffLocation;
+    @Column(nullable = false)
+    private double amount;
 
 }
